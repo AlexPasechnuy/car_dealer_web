@@ -17,7 +17,7 @@ if (isset($_SESSION["user"])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Supply</title>
+    <title>Car Dealer</title>
 </head>
 <body>
 <p>
