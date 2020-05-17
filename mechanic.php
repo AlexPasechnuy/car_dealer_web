@@ -23,6 +23,7 @@ if (!isset($_SESSION["user"])) {
 <table border="1">
     <tr>
         <th>Client name</th>
+        <th>Client phone</th>
         <th>Make</th>
         <th>Model</th>
         <th>Time</th>
@@ -41,13 +42,13 @@ if (!isset($_SESSION["user"])) {
 
         <tr>
             <td><?= $row["client_name"] ?></td>
+            <td><?= $row["client_phone"] ?></td>
             <td><?= $row["make"] ?></td>
             <td><?= $row["model"] ?></td>
             <td><?= $row["time"] ?></td>
             <td><?= $row["info"] ?></td>
             <td>
-                <a href="index.php?action=update&id=<?= $row["id"] ?>">All info</a>
-                <a href="index.php?action=delete&id=<?= $row["id"] ?>">Report</a>
+                <a href="index.php?action=delete&id=<?= $row["id"] ?>"> Report </a>
             </td>
         </tr>
         <?php
