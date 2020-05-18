@@ -10,12 +10,15 @@ if (!isset($_SESSION["user"])) {
         border-collapse: collapse;
         width: 100%;
     }
+
     th, td {
         text-align: left;
         padding: 8px;
     }
 
-    tr:nth-child(even){background-color: #f2f2f2}
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
 
     th {
         background-color: lightskyblue;
@@ -25,16 +28,24 @@ if (!isset($_SESSION["user"])) {
 <p>
     <?php
     # if the page is in record's create/update or delete mode (action parameter is set) - show 'back' link
-    if (isset($_GET["action"]) && ($_GET["action"] == "create" || $_GET["action"] == "update"
-            || $_GET["action"] == "delete")) {
+    if (isset($_GET["action"]) && $_GET["action"] == "see_all") {
         ?>
-        <a href="index.php">Back</a>
+        <a href="index.php?action=see_undel">Show undelivery lots</a>
         <?php
         # otherwise - show 'new record' link
     } else {
         ?>
-        <a href="index.php?action=create">View all delivery lots</a>
+        <a href="index.php?action=see_all">Show all delivery lots</a>
         <?php
+    }
+    $sdl = "";
+    if (isset($_GET["action"]) && $_GET["action"] == "see_all") {
+        $sql = "SELECT *    FROM supplies_info
+    ORDER BY expected_arrival_date";
+    } else {
+        $sql = "SELECT *    FROM supplies_info
+        WHERE status != 'delivered'
+        ORDER BY expected_arrival_date";
     }
     ?>
 <table border="1">
@@ -48,9 +59,7 @@ if (!isset($_SESSION["user"])) {
     </tr>
     <?php
     # retrieve and display data about contracts
-    $sql = "SELECT *    FROM supplies_info
-    WHERE status != 'delivered'
-    ORDER BY expected_arrival_date";
+
     $result = mysqli_query($conn, $sql);
 
     while ($row = mysqli_fetch_assoc($result)) {

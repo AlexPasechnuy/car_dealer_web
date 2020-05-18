@@ -33,8 +33,7 @@ else {
     where username = '{$_SESSION["user"]}' AND password = '{$_SESSION["pass"]}'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
-        $pos = $row["position"];
+        $pos = mysqli_fetch_assoc($result)["position"];
     }
 }
 # display content depending on the user type
