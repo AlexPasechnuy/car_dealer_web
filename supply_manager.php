@@ -5,6 +5,23 @@ if (!isset($_SESSION["user"])) {
 }
 ?>
 <h3>Undelivered supplies</h3>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+
+    th {
+        background-color: lightskyblue;
+        color: white;
+    }
+</style>
 <p>
     <?php
     # if the page is in record's create/update or delete mode (action parameter is set) - show 'back' link

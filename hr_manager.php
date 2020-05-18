@@ -4,22 +4,66 @@ if (!isset($_SESSION["user"])) {
     header("location: login.php");
 }
 ?>
-<h3>Repair orders for today</h3>
-<p>
-    <?php
-    # if the page is in record's create/update or delete mode (action parameter is set) - show 'back' link
-    if (isset($_GET["action"]) && ($_GET["action"] == "create" || $_GET["action"] == "update"
-            || $_GET["action"] == "delete")) {
-        ?>
-        <a href="index.php">Back</a>
-        <?php
-        # otherwise - show 'new record' link
-    } else {
-        ?>
-        <a href="index.php?action=create">Create profile for new employee</a>
-        <?php
+<h3>List of employees</h3>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
     }
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+
+    th {
+        background-color: lightskyblue;
+        color: white;
+    }
+</style>
+<?php
+# if the page is in record's create/update or delete mode (action parameter is set) - show 'back' link
+if (isset($_GET["action"]) && ($_GET["action"] == "change_emp")) {
     ?>
+    <a href="index.php">Back</a>
+    <?php
+    # otherwise - show 'new record' link
+}
+if (isset($_GET["action"]) && ($_GET["action"] == "change_emp")) {
+    $username = $_GET["id"];
+    $sql = "SELECT salary FROM employee WHERE username = '{$username}'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $note = $row["salary"];
+    ?>
+    <form id="cr_rep" method="post" action="index.php">
+        <input type="hidden" value="<?= $username ?>" name="username"/>
+        <p>
+            <b>Change employee</b>
+        </p>
+        <p>Position</p>
+        <p>
+            <select name="position">
+                <option value="mechanic">Mechanic</option>
+                <option value="sales_manager">Sales manager</option>
+                <option value="supply_manager">Supply manager</option>
+                <option value="HR_manager">HR manager</option>
+                <option value="admin">Admin</option>
+            </select>
+        </p>
+        <p>Salary</p>
+        <p>
+            <input type="number" name="salary" value="<?php echo $note ?>"></p>
+        </p>
+        <p>
+            <input type="submit" name="save_emp" value="Save"
+        </p>
+    </form>
+    <?php
+
+} else {
+?>
 <table border="1">
     <tr>
         <th>Name</th>
@@ -34,7 +78,8 @@ if (!isset($_SESSION["user"])) {
     </tr>
     <?php
     # retrieve and display data about contracts
-    $sql = "SELECT * , DATE(birth_date) as birth, DATE(enroll_date) as enroll FROM employee
+    $sql = "SELECT *, DATE(birth_date) as birth_date, DATE(enroll_date) as enroll_date 
+    FROM employee
     ORDER BY surname";
     $result = mysqli_query($conn, $sql);
 
@@ -46,15 +91,16 @@ if (!isset($_SESSION["user"])) {
             <td><?= $row["surname"] ?></td>
             <td><?= $row["position"] ?></td>
             <td><?= $row["salary"] ?></td>
-            <td><?= $row["birth"] ?></td>
-            <td><?= $row["enroll"] ?></td>
+            <td><?= $row["birth_date"] ?></td>
+            <td><?= $row["enroll_date"] ?></td>
             <td><?= $row["phone"] ?></td>
             <td><?= $row["email"] ?></td>
             <td>
-                <a href="index.php?action=delete&id=<?= $row["id"] ?>"> change </a>
+                <a href="index.php?action=change_emp&id=<?= $row["username"] ?>">Change</a>
             </td>
         </tr>
         <?php
+    }
     }
     ?>
 </table>
