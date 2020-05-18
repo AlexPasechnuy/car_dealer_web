@@ -4,7 +4,7 @@ if (!isset($_SESSION["user"])) {
     header("location: login.php");
 }
 ?>
-<h3>List of supplies</h3>
+<h3>List of sale orders</h3>
 <style>
     table {
         border-collapse: collapse;
@@ -24,79 +24,54 @@ if (!isset($_SESSION["user"])) {
 </style>
 <?php
 # if the page is in record's create/update or delete mode (action parameter is set) - show 'back' link
-if (isset($_GET["action"]) && ($_GET["action"] == "change_emp")) {
+if (isset($_GET["action"]) && ($_GET["action"] == "avail_cars")) {
     ?>
     <a href="index.php">Back</a>
     <?php
     # otherwise - show 'new record' link
-}
-if (isset($_GET["action"]) && ($_GET["action"] == "change_emp")) {
-    $username = $_GET["id"];
-    $sql = "SELECT salary FROM employee WHERE username = '{$username}'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $note = $row["salary"];
+}else{
     ?>
-    <form id="cr_rep" method="post" action="index.php">
-        <input type="hidden" value="<?= $username ?>" name="username"/>
-        <p>
-            <b>Change employee</b>
-        </p>
-        <p>Position</p>
-        <p>
-            <select name="position">
-                <option value="mechanic">Mechanic</option>
-                <option value="sales_manager">Sales manager</option>
-                <option value="supply_manager">Supply manager</option>
-                <option value="HR_manager">HR manager</option>
-                <option value="admin">Admin</option>
-            </select>
-        </p>
-        <p>Salary</p>
-        <p>
-            <input type="number" name="salary" value="<?php echo $note ?>"></p>
-        </p>
-        <p>
-            <input type="submit" name="save_emp" value="Save"
-        </p>
-    </form>
+    <a href="index.php?action=see_avail">See available cars</a>
     <?php
+}
+if (isset($_GET["action"]) && ($_GET["action"] == "see_avail")) {
 
 } else {
 ?>
 <table border="1">
     <tr>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Position</th>
-        <th>Salary</th>
-        <th>Birth date</th>
-        <th>Enrollment date</th>
-        <th>Phone</th>
-        <th>Email</th>
+        <th>Client name</th>
+        <th>Client phone</th>
+        <th>VIN</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Price</th>
+        <th>Info</th>
         <th>Action</th>
     </tr>
     <?php
     # retrieve and display data about contracts
-    $sql = "SELECT *, DATE(birth_date) as birth_date, DATE(enroll_date) as enroll_date 
-    FROM employee
-    ORDER BY surname";
+    $sql = "SELECT *
+    FROM sell_ord_info
+    WHERE employee_username = '{$_SESSION["user"]}'
+    ORDER BY client_name";
     $result = mysqli_query($conn, $sql);
 
     while ($row = mysqli_fetch_assoc($result)) {
         ?>
 
         <tr>
-            <td><?= $row["name"] ?></td>
-            <td><?= $row["surname"] ?></td>
-            <td><?= $row["position"] ?></td>
-            <td><?= $row["salary"] ?></td>
-            <td><?= $row["birth_date"] ?></td>
-            <td><?= $row["enroll_date"] ?></td>
-            <td><?= $row["phone"] ?></td>
-            <td><?= $row["email"] ?></td>
+            <td><?= $row["client_name"] ?></td>
+            <td><?= $row["client_phone"] ?></td>
+            <td><?= $row["vin"] ?></td>
+            <td><?= $row["make"] ?></td>
+            <td><?= $row["model"] ?></td>
+            <td><?= $row["price"] ?></td>
+            <td><?= $row["info"] ?></td>
             <td>
-                <a href="index.php?action=change_emp&id=<?= $row["username"] ?>">Change</a>
+                <a href="index.php?action=sell&id=<?= $row["id"] ?>">Sell</a>
+                <a href="index.php?action=delete&id=<?= $row["id"] ?>">Delete</a>
+                <a href="index.php?action=car_info&id=<?= $row["vin"] ?>">Car info</a>
             </td>
         </tr>
         <?php
