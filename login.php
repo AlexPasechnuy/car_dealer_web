@@ -30,10 +30,10 @@ if (isset($_POST["login"])) {
 <style>
     Body {
         font-family: Calibri, Helvetica, sans-serif;
-        background-color: lightskyblue;
+        background-color: #848484;
     }
     button {
-        background-color: darkblue;
+        background-color: #000000;
         width: 20%;
         color: white;
         padding: 15px;
@@ -44,19 +44,19 @@ if (isset($_POST["login"])) {
         opacity: 0.7;
     }
     button:hover{
-        background-color: #3167ff;
-        color: white;
+        background-color: #575757;
+        color: #ffffff;
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     }
     form {
-        border: 3px solid #f1f1f1;
+        border: 3px solid #000000;
     }
     input[type=text], input[type=password] {
         width: 20%;
         margin: 8px 0;
         padding: 12px 20px;
         display: inline-block;
-        border: 3px solid darkblue;
+        border: 3px solid #000000;
         box-sizing: border-box;
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     }

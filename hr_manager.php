@@ -10,16 +10,19 @@ if (!isset($_SESSION["user"])) {
         border-collapse: collapse;
         width: 100%;
     }
+
     th, td {
         text-align: left;
         padding: 8px;
     }
 
-    tr:nth-child(even){background-color: #f2f2f2}
+    tr:nth-child(even) {
+        background-color: #d5d5d5
+    }
 
     th {
-        background-color: lightskyblue;
-        color: white;
+        background-color: #424242;
+        color: #ffffff;
     }
 </style>
 <?php
@@ -62,7 +65,7 @@ if (isset($_GET["action"]) && ($_GET["action"] == "change_emp")) {
     </form>
     <?php
 
-} else {
+}else {
 ?>
 <table border="1">
     <tr>

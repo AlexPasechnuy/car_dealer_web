@@ -17,12 +17,15 @@ if (!isset($_SESSION["user"])) {
     }
 
     tr:nth-child(even) {
-        background-color: #f2f2f2
+        background-color: #d5d5d5
     }
 
     th {
-        background-color: lightskyblue;
-        color: white;
+        background-color: #424242;
+        color: #ffffff;
+    }
+    body{
+        background-color: #e3e3e3;
     }
 </style>
 <p>

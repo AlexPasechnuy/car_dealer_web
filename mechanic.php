@@ -10,16 +10,19 @@ if (!isset($_SESSION["user"])) {
         border-collapse: collapse;
         width: 100%;
     }
+
     th, td {
         text-align: left;
         padding: 8px;
     }
 
-    tr:nth-child(even){background-color: #f2f2f2}
+    tr:nth-child(even) {
+        background-color: #d5d5d5
+    }
 
     th {
-        background-color: lightskyblue;
-        color: white;
+        background-color: #424242;
+        color: #ffffff;
     }
 </style>
 <?php
@@ -32,6 +35,40 @@ if (isset($_GET["action"]) && ($_GET["action"] == "report")) {
 }
 if (isset($_GET["action"]) && ($_GET["action"] == "report")) {
     ?>
+    <style>
+        Body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: #848484;
+        }
+        button {
+            background-color: #000000;
+            width: 20%;
+            color: white;
+            padding: 15px;
+            margin: 10px 0px;
+            border: none;
+            cursor: pointer;
+            transition-duration: 0.4s;
+            opacity: 0.7;
+        }
+        button:hover{
+            background-color: #575757;
+            color: #ffffff;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        form {
+            border: 3px solid #000000;
+        }
+        input[type=text], input[type=password] {
+            width: 20%;
+            margin: 8px 0;
+            padding: 12px 20px;
+            display: inline-block;
+            border: 3px solid #000000;
+            box-sizing: border-box;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+    </style>
     <form id="cr_rep" method="post" action="index.php">
         <input type="hidden" value="<?= $_GET["id"] ?>" name="rep_ord_id"/>
         <p>
@@ -46,7 +83,7 @@ if (isset($_GET["action"]) && ($_GET["action"] == "report")) {
             <textarea name="note" rows="5" cols="50"></textarea>
         </p>
         <p>
-            <input type="submit" name="create_report" value="Save"
+            <button type="submit" name="create_report">Save</button>
         </p>
     </form>
     <?php
