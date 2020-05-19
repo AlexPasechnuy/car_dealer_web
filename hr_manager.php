@@ -4,7 +4,7 @@ if (!isset($_SESSION["user"])) {
     header("location: login.php");
 }
 ?>
-<h3>List of employees</h3>
+<h2>List of employees</h2>
 <style>
     table {
         border-collapse: collapse;
@@ -24,12 +24,43 @@ if (!isset($_SESSION["user"])) {
         background-color: #424242;
         color: #ffffff;
     }
+    Body {
+        font-family: Calibri, Helvetica, sans-serif;
+        background-color: #848484;
+    }
+    button {
+        background-color: #000000;
+        width: 20%;
+        color: white;
+        padding: 15px;
+        margin: 10px 0px;
+        border: none;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        opacity: 0.7;
+    }
+    button:hover{
+        background-color: #575757;
+        color: #ffffff;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+    form {
+        border: 3px solid #000000;
+    }
+    input[type=text], input[type=password] ,select , input[type=number]{
+        width: 20%;
+        margin: 8px 0;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 3px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 </style>
 <?php
 # if the page is in record's create/update or delete mode (action parameter is set) - show 'back' link
 if (isset($_GET["action"]) && ($_GET["action"] == "change_emp")) {
     ?>
-    <a href="index.php">Back</a>
+    <h3><a href="index.php">Back</a></h3>
     <?php
     # otherwise - show 'new record' link
 }
@@ -43,9 +74,9 @@ if (isset($_GET["action"]) && ($_GET["action"] == "change_emp")) {
     <form id="cr_rep" method="post" action="index.php">
         <input type="hidden" value="<?= $username ?>" name="username"/>
         <p>
-            <b>Change employee</b>
+            <b><h3>Change employee</h3></b>
         </p>
-        <p>Position</p>
+        <p><b>Position</b></p>
         <p>
             <select name="position">
                 <option value="mechanic">Mechanic</option>
@@ -55,12 +86,12 @@ if (isset($_GET["action"]) && ($_GET["action"] == "change_emp")) {
                 <option value="admin">Admin</option>
             </select>
         </p>
-        <p>Salary</p>
+        <p><b>Salary</b></p>
         <p>
             <input type="number" name="salary" value="<?php echo $note ?>"></p>
         </p>
         <p>
-            <input type="submit" name="save_emp" value="Save"
+            <button type="submit" name="save_emp">Save</button>
         </p>
     </form>
     <?php

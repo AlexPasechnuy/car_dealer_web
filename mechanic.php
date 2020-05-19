@@ -4,7 +4,7 @@ if (!isset($_SESSION["user"])) {
     header("location: login.php");
 }
 ?>
-<h3>Repair orders for today</h3>
+<h2>Repair orders for today</h2>
 <style>
     table {
         border-collapse: collapse;
@@ -24,61 +24,64 @@ if (!isset($_SESSION["user"])) {
         background-color: #424242;
         color: #ffffff;
     }
+
+    Body {
+        font-family: Calibri, Helvetica, sans-serif;
+        background-color: #848484;
+    }
+
+    button {
+        background-color: #000000;
+        width: 20%;
+        color: white;
+        padding: 15px;
+        margin: 10px 0px;
+        border: none;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        opacity: 0.7;
+    }
+
+    button:hover {
+        background-color: #575757;
+        color: #ffffff;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    form {
+        border: 3px solid #000000;
+    }
+
+    input[type=text], input[type=password] ,textarea{
+        width: 20%;
+        margin: 8px 0;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 3px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    }
 </style>
 <?php
 # if the page is in record's create/update or delete mode (action parameter is set) - show 'back' link
 if (isset($_GET["action"]) && ($_GET["action"] == "report")) {
     ?>
-    <a href="index.php">Back</a>
+    <h3><a href="index.php">Back</a></h3>
     <?php
     # otherwise - show 'new record' link
 }
 if (isset($_GET["action"]) && ($_GET["action"] == "report")) {
     ?>
-    <style>
-        Body {
-            font-family: Calibri, Helvetica, sans-serif;
-            background-color: #848484;
-        }
-        button {
-            background-color: #000000;
-            width: 20%;
-            color: white;
-            padding: 15px;
-            margin: 10px 0px;
-            border: none;
-            cursor: pointer;
-            transition-duration: 0.4s;
-            opacity: 0.7;
-        }
-        button:hover{
-            background-color: #575757;
-            color: #ffffff;
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        }
-        form {
-            border: 3px solid #000000;
-        }
-        input[type=text], input[type=password] {
-            width: 20%;
-            margin: 8px 0;
-            padding: 12px 20px;
-            display: inline-block;
-            border: 3px solid #000000;
-            box-sizing: border-box;
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        }
-    </style>
     <form id="cr_rep" method="post" action="index.php">
         <input type="hidden" value="<?= $_GET["id"] ?>" name="rep_ord_id"/>
         <p>
-            <b>Report</b>
+            <b><h2>Report</h2></b>
         </p>
-        <p>VIN</p>
+        <p><b><h3>VIN</h3></b></p>
         <p>
             <input type="text" name="vin">
         </p>
-        <p>Info</p>
+        <p><b><h3>Info</h3></b></p>
         <p>
             <textarea name="note" rows="5" cols="50"></textarea>
         </p>

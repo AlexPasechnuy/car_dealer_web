@@ -21,7 +21,7 @@ if (isset($_SESSION["user"])) {
 </head>
 <body>
 <p>
-    <b>User:</b> <i><?= $_SESSION["user"] ?></i> | <a href="logout.php">Logout</a>
+<h3><b>User:</b> <i><?= $_SESSION["user"] ?></i> | <a href="logout.php">Logout</a> </h3>
 </p>
 <?php
 $pos = "";

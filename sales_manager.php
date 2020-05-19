@@ -4,7 +4,7 @@ if (!isset($_SESSION["user"])) {
     header("location: login.php");
 }
 ?>
-<h3>List of sale orders</h3>
+<h2>List of sale orders</h2>
 <style>
     table {
         border-collapse: collapse;
@@ -24,18 +24,55 @@ if (!isset($_SESSION["user"])) {
         background-color: #424242;
         color: #ffffff;
     }
+
+    Body {
+        font-family: Calibri, Helvetica, sans-serif;
+        background-color: #848484;
+    }
+
+    button {
+        background-color: #000000;
+        width: 20%;
+        color: white;
+        padding: 15px;
+        margin: 10px 0px;
+        border: none;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        opacity: 0.7;
+    }
+
+    button:hover {
+        background-color: #575757;
+        color: #ffffff;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    form {
+        border: 3px solid #000000;
+    }
+
+    input[type=text], input[type=password], textarea {
+        width: 20%;
+        margin: 8px 0;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 3px solid #000000;
+        box-sizing: border-box;
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    }
 </style>
 <?php
 # if the page is in record's create/update or delete mode (action parameter is set) - show 'back' link
 if (isset($_GET["action"]) && ($_GET["action"] == "see_avail" || $_GET["action"] == "car_info"
         || $_GET["action"] == "create_sell_ord" || $_GET["action"] == "delete_sell" || $_GET["action"] == "sell_car")) {
     ?>
-    <a href="index.php">Back</a>
+    <a href="index.php"><h3>Back</h3></a>
     <?php
     # otherwise - show 'new record' link
 } else {
     ?>
-    <a href="index.php?action=see_avail">See available cars</a>
+    <a href="index.php?action=see_avail"><h3>See available cars</h3></a>
     <?php
 }
 if (isset($_GET["action"]) && ($_GET["action"] == "see_avail")) {
@@ -82,9 +119,9 @@ if (isset($_GET["action"]) && ($_GET["action"] == "see_avail")) {
     ?>
     <form method="post" action="index.php">
         <input type="hidden" value="<?= $_GET["id"] ?>" name="sell_ord_id"/>
-        <b>Delete the sell order?</b>
+        <b><h2>Delete the sell order?</h2></b>
         <p>
-            <input type="submit" name="del_sel_ord" value="Yes"/>
+            <button type="submit" name="del_sel_ord">Yes</button>
         </p>
     </form>
     <?php
@@ -92,9 +129,9 @@ if (isset($_GET["action"]) && ($_GET["action"] == "see_avail")) {
     ?>
     <form method="post" action="index.php">
         <input type="hidden" value="<?= $_GET["id"] ?>" name="sell_ord_id"/>
-        <b>Sell car by this order?</b>
+        <b><h2>Sell car by this order?</h2></b>
         <p>
-            <input type="submit" name="sell_car" value="Yes"/>
+            <button type="submit" name="sell_car">Yes</button>
         </p>
     </form>
     <?php
@@ -155,7 +192,7 @@ if (isset($_GET["action"]) && ($_GET["action"] == "see_avail")) {
             <textarea name="sell_info" rows="5" cols="50"></textarea>
         </p>
         <p>
-            <input type="submit" name="cr_sell_ord" value="Create"/>
+            <button type="submit" name="cr_sell_ord">Create</button>
         </p>
     </form>
     <?php
